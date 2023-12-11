@@ -1,7 +1,33 @@
 import { Link } from "react-router-dom";
 
+export const dateFormate = (dateString) => {
+  const date = new Date(dateString);
+
+  const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+
+  const day = days[date.getDay()];
+  const dateNum = date.getDate();
+  const month = months[date.getMonth()];
+  const year = date.getFullYear();
+  
+  const formattedDate = `${day} ${dateNum} ${month} ${year}`;
+  return formattedDate;
+};
 export default function NewsItem({ hit }) {
-  console.log(hit);
   return (
     <div className="bg-white shadow-md hover:shadow-lg transition-shadow overflow-hidden rounded-lg  sm:w-[330px]">
       <Link to={`/news/${hit.story_id}`}>
@@ -23,10 +49,10 @@ export default function NewsItem({ hit }) {
           <div className="items-center gap-1 grid grid-cols-2 py-5">
             <p className="text-sm text-gray-600 font-semibold ">Posted At:</p>
             <p className="text-sm text-gray-600 truncate w-full">
-              {hit?.created_at}
+              {dateFormate(hit?.created_at)}
             </p>
           </div>
-             <p className="text-slate-500 mt-2 font-semibold ">
+          <p className="text-slate-500 mt-2 font-semibold ">
             Comments: {hit?.num_comments}
           </p>
         </div>

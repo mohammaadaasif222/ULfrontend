@@ -1,22 +1,17 @@
-import React, { Suspense, useEffect, useState } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import React, {useEffect, useState } from "react";
+import {  useParams } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore from "swiper";
-import { useSelector, useDispatch } from "react-redux";
 import { Navigation } from "swiper/modules";
-import Spinner from "../components/Spinner";
 import "swiper/css/bundle";
-import { FaMapMarkerAlt, FaShare, FaChevronDown } from "react-icons/fa";
 import Comment from "../components/Comment";
+import {dateFormate} from '../components/NewsItem'
 export default function News() {
-  const dispacth = useDispatch();
-  const navigate = useNavigate();
   SwiperCore.use([Navigation]);
   const [news, setnews] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [syllabus, setSyllabus] = useState(false);
-
+  
   const params = useParams();
 
   useEffect(() => {
@@ -77,7 +72,7 @@ export default function News() {
                   <span className="  text-black  font-semibold">
                     Posted At:{" "}
                   </span>
-                  {news?.created_at}
+                  {dateFormate(news?.created_at)}
                 </p>
                 <p className="text-slate-800">
                   <span className="font-semibold text-black">Author - </span>
