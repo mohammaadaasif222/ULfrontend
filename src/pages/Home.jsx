@@ -3,6 +3,7 @@ import { Navigation } from "swiper/modules";
 import SwiperCore from "swiper";
 import "swiper/css/bundle";
 import Spinner from "../components/Spinner";
+import CardLoader from "../components/CardLoader";
 import { useSelector } from "react-redux";
 import { selectAllNews } from "../redux/news/newsSlice";
 
@@ -26,7 +27,7 @@ export default function Home() {
               style={{ overflow: "auto", maxHeight: "400px" }}
             >
               {hits.map((hit) => (
-                <Suspense key={hit.created_at_i} fallback={<Spinner />}>
+                <Suspense key={hit.created_at_i} fallback={<CardLoader />}>
                   <NewsItem hit={hit} key={hit.created_at_i} />
                 </Suspense>
               ))}
